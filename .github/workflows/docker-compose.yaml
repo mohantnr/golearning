@@ -13,6 +13,8 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - name: Build the Docker image
-      run: docker build ./api --tag mohantnr/aoper:ubuntu_latest
+      run: docker build ./api --file ./api/Dockerfile --tag mohantnr/aoper:ubuntu_latest
     - name: docker push image
-      run: docker push mohantnr/aoper:ubuntu_latest      
+      run: |
+        docker login -u mohantnr -p ${{ secrets.DOCKER_HUB_SECRETS }}
+        docker push mohantnr/aoper:ubuntu_latest      
