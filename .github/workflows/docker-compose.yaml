@@ -1,16 +1,19 @@
-name: Build and Publish image to Docker hub
-on:
-  [workflow_dispatch]
+name: Docker Image CI
 
-jobs: 
-  publish_images:
+on:
+  [workflow_batch]
+  # push:
+  #   branches: [ "api" ]
+  # pull_request:
+  #   branches: [ "api" ]
+
+jobs:
+
+  build:
     runs-on: ubuntu-latest
     steps:
-      - name: checkout
-        users: actions/checkout@v4
-      - name: build image
-        run: docker build ./api/ -t docker push mohantnr/aoper:ubuntu_latest
-      - name: push iamge to docker hub
-        run: |
-          docker push mohantnr/aoper:ubuntu_latest
-
+    - uses: actions/checkout@v4
+    - name: Build the Docker image
+      run: docker build . --file Dockerfile --tag mohantnr/aoper:ubuntu_latest
+    - name: docker push image
+      run: docker push mohantnr/aoper:ubuntu_latest      
