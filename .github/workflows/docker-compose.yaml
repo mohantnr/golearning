@@ -1,13 +1,11 @@
 name: Docker Image CI
 
+
 on:
   push:
-    branches: [ "api" ]
-  pull_request:
-    branches: [ "api" ]
+    branches: [ "api" ]  
 
 jobs:
-
   build:
     runs-on: ubuntu-latest
     steps:
@@ -17,4 +15,5 @@ jobs:
     - name: docker push image
       run: |
         docker login -u mohantnr -p ${{ secrets.DOCKER_HUB_SECRETS }}
-        docker push mohantnr/aoper:ubuntu_latest      
+        docker push mohantnr/aoper:ubuntu_latest 
+             
