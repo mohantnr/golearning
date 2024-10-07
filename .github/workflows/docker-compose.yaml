@@ -1,0 +1,16 @@
+name: Build and Publish image to Docker hub
+on:
+  [workflow_dispatch]
+
+jobs: 
+  Publish_images:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        users: actions/checkout@v4
+      - name: build image
+        run: docker build ./api/ -t docker push mohantnr/aoper:ubuntu_latest
+      - name: push iamge to docker hub
+        run: |
+          docker push mohantnr/aoper:ubuntu_latest
+
