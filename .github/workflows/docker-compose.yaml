@@ -14,6 +14,6 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag mohantnr/aoper:ubuntu_latest
+      run: docker build ./api --file Dockerfile --tag mohantnr/aoper:ubuntu_latest
     - name: docker push image
       run: docker push mohantnr/aoper:ubuntu_latest      
