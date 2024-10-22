@@ -1,19 +1,23 @@
 name: Docker Image CI
-
-
 on:
-  push:
-    branches: [ "api" ]  
-
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Target environment'
+        required: true
+        default: 'development'
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
+      with:
+        path: 
     - name: Build the Docker image
       run: docker build ./api --file ./api/Dockerfile --tag mohantnr/aoper:ubuntu_latest
     - name: docker push image
       run: |
         docker login -u mohantnr -p ${{ secrets.DOCKER_HUB_SECRETS }}
         docker push mohantnr/aoper:ubuntu_latest 
+
              
